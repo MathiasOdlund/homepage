@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Homepage</title>
+  </head>
+  <body class="bg-[#282828]">
+    <div class="weather absolute top-10 left-10 w-14 h-14">
+      <img src="./public/weather.svg " alt="" />
+    </div>
+    <main
+      class="flex items-center justify-center flex-col h-screen text-[#ebdbb2] w-[70%] mx-auto"
+    >
+      <div class=" -mt-32 mb-4 flex flex-col justify-center items-center">
+        <h1 class="text-7xl" id="weekday">Weekday</h1>
+        <p class="text-lg text-[#d5c4a1]" id="date">Date</p>
+
+      </div>
+      <p class="text-sm text-[#a89984] w-[80%] flex text-center justify-center items-center mx-auto mb-4" id="quote"></p>
+      <input
+        type="text"
+        id="search"
+        class="w-full text-[#a89984] bg-[#3c3836] p-4"
+        placeholder="How to center a div.."
+      />
+      <div
+        class="quicklinks w-full pt-2 justify-center items-center  flex flex-col"
+      >
+      
+
+        <div class="flex gap-4 sm:gap-10 md:gap-20 mt-2 items-center ">
+          <a href="http://teams.microsoft.com/">
+            <div class="box">
+              <img class="object-cover w-10 sm:w-10 md:w-14 lg:w-14" src="./public/teams.svg" alt="" />
+            </div>
+          </a>
+          <a href="https://www.stackoverflow.com/">
+            <div class="box">
+              <img class="object-cover w-10 sm:w-10 md:w-14 lg:w-14" src="./public/stack.svg" alt="" />
+            </div>
+          </a>
+
+          <a href="https://www.github.com/">
+            <div class="box">
+              <img class="object-cover w-10 sm:w-10 md:w-14 lg:w-14" src="./public/github.svg" alt="" />
+            </div>
+          </a>
+          <a href="https://www.youtube.com/">
+            <div class="box">
+              <img
+                class="object-cover w-10 sm:w-10 md:w-14 lg:w-14"
+                src="./public/youtube.svg"
+                alt=""
+              />
+            </div>
+          </a>
+        </div>
+      </div>
+    </main>
+  </body>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+    ::placeholder {
+      color: #a89984 !important;
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #a89984 !important;
+    }
+    ::-ms-input-placeholder {
+      color: #a89984 !important;
+    }
+  </style>
+  <script>
+    const getDate = () => {
+      const date = new Date();
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      document.getElementById("date").innerHTML = date.toLocaleDateString(
+        "en-US",
+        options
+      );
+      document.getElementById("weekday").innerHTML = date.toLocaleDateString(
+        "en-US",
+        { weekday: "long" }
+      );
+    };
+    const search = () =>{
+        const search = document.getElementById("search");
+        search.addEventListener("keyup", (e) => {
+            if (e.key === "Enter") {
+            window.location.href = `https://www.google.com/search?q=${search.value}`;
+            }
+        });
+    }
+    const getWeather = () => {
+      const weather = document.querySelector(".weather");
+      const weatherText = weather.querySelector("p");
+      weatherText.innerHTML = "Weather";
+    };
+    const stoicQuotes = () =>{
+        const randomquotes = [
+            'When someone is properly grounded in life, they shouldn’t have to look outside themselves for approval. - Epictetus',
+            'Waste no more time arguing what a good man should be. Be one. – Marcus Aurelius',
+            'The Fates guide the person who accepts them and hinder the person who resists them. - Cleanthes',
+            'I will reveal to you a love potion, without medicine, without herbs, without any witch’s magic; if you want to be loved, then love - Hecato of Rhodes',
+            'It does not matter what you bear, but how you bear it - Seneca',
+            
+        ]
+        const randomQuote = randomquotes[Math.floor(Math.random() * randomquotes.length)];
+        document.getElementById("quote").innerHTML = randomQuote;
+    }
+    const init = () => {
+      getDate();
+      stoicQuotes()
+      search();
+      getWeather();
+    };
+    init();
+  </script>
+</html>
